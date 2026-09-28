@@ -1,0 +1,14 @@
+Inorder Traversal:
+A102 A120 A25 A45 A7 B100 B12 B3
+
+Search: A45
+BST Search: Found, Comparisons = 3
+Linear Search: Found, Comparisons = 8
+
+Search: B3
+BST Search: Found, Comparisons = 4
+Linear Search: Found, Comparisons = 7
+
+Search: A50
+BST Search: Not Found, Comparisons = 4
+Linear Search: Not Found, Comparisons = 8
