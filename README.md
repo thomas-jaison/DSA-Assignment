@@ -1,18 +1,32 @@
-QUESTION 11 - BINARY SEARCH TREE
+# 🌳 QUESTION 11 — BINARY SEARCH TREE
 
-Problem Statement
+## 📌 Data Structures and Algorithms
+
+**Assignment:** Assignment 2  
+**Question:** 11  
+**Topic:** Binary Search Tree (BST) and Searching Algorithms
+
+---
+
+## 📝 Problem Statement
 
 A government database stores the following identification numbers:
 
+```text
 A102, A25, A7, B100, B12, A120, B3, A45
+```
 
-The identification numbers are organised using a Binary Search Tree. BST Search and Linear Search are compared based on the number of comparisons. The effect of key length and insertion order on BST height and search performance is also analysed.
+The identification numbers are organised using a **Binary Search Tree (BST)**. BST Search and Linear Search are compared based on the number of comparisons.
 
+The effect of **key length** and **insertion order** on BST height and search performance is also analysed.
 
-INPUT DATA
+---
 
-Identification Numbers:
+## 📥 Input Data
 
+### Identification Numbers
+
+```text
 A102
 A25
 A7
@@ -21,17 +35,21 @@ B12
 A120
 B3
 A45
+```
 
-Search Keys:
+### Search Keys
 
+```text
 A45
 B3
 A50
+```
 
+---
 
-DATA STRUCTURE USED
+## 🌲 Data Structure Used
 
-Binary Search Tree (BST)
+### Binary Search Tree (BST)
 
 Each node contains:
 
@@ -39,17 +57,18 @@ Each node contains:
 2. Pointer to the left child
 3. Pointer to the right child
 
-The identification numbers are compared as strings using strcmp().
+The identification numbers are compared as strings using `strcmp()`.
 
-If the new ID is smaller than the current node, it is inserted into the left subtree.
+- If the new ID is smaller than the current node, it is inserted into the **left subtree**.
+- If the new ID is greater than the current node, it is inserted into the **right subtree**.
 
-If the new ID is greater than the current node, it is inserted into the right subtree.
+---
 
-
-BST CONSTRUCTION
+# 🌳 BST Construction
 
 The IDs are inserted in the given order:
 
+```text
 A102
 A25
 A7
@@ -58,9 +77,11 @@ B12
 A120
 B3
 A45
+```
 
-Resulting BST:
+### Resulting BST
 
+```text
                     A102
                    /    \
                 A25      B100
@@ -68,224 +89,197 @@ Resulting BST:
             A120    A7      B12
                \              \
                A45             B3
+```
 
 The tree is not completely balanced.
 
 The longest path contains 4 nodes:
 
-A102 -> B100 -> B12 -> B3
+```text
+A102 → B100 → B12 → B3
+```
 
-Therefore, the height of the tree is 3 edges or 4 levels.
+Therefore:
 
+```text
+Height = 3 edges
+Levels = 4
+```
 
-INORDER TRAVERSAL
+---
 
-The inorder traversal follows:
+# 🔄 Inorder Traversal
 
-Left Subtree -> Root -> Right Subtree
+Inorder traversal follows:
 
-Output:
+```text
+Left Subtree → Root → Right Subtree
+```
 
+### Output
+
+```text
 A102 A120 A25 A45 A7 B100 B12 B3
+```
 
-Since the IDs are strings, the ordering is based on lexicographical string comparison.
+Since the IDs are strings, the ordering is based on **lexicographical string comparison**.
 
+---
 
-TRACE TABLE - BST INSERTION
+# 📊 Trace Table — BST Insertion
 
-Step 1
+| Step | Inserted ID | Comparisons | Position |
+|---:|---|---|---|
+| 1 | `A102` | Root node | Root |
+| 2 | `A25` | A25 > A102 | Right of A102 |
+| 3 | `A7` | A7 < A102, A7 < A25 | Left of A25 |
+| 4 | `B100` | B100 > A102, B100 > A25 | Right of A25 |
+| 5 | `B12` | B12 > A102, B12 > A25, B12 < B100 | Left of B100 |
+| 6 | `A120` | A120 > A102, A120 < A25 | Left of A25 |
+| 7 | `B3` | B3 > A102, B3 > A25, B3 < B100, B3 > B12 | Right of B12 |
+| 8 | `A45` | A45 < A102, A45 > A25, A45 > A120 | Right of A120 |
 
-Inserted: A102
+---
 
-Tree:
+# 🔎 Search Trace
 
-A102
+## Search Key: `A45`
 
+### BST Search Path
 
-Step 2
+```text
+A102 → A25 → A45
+```
 
-Inserted: A25
+**Number of comparisons:** `3`
 
-Comparison:
-A25 > A102
+**Result:** `Found`
 
-Inserted to the right of A102.
+### Linear Search Path
 
+```text
+A102 → A25 → A7 → B100 → B12 → A120 → B3 → A45
+```
 
-Step 3
+**Number of comparisons:** `8`
 
-Inserted: A7
+**Result:** `Found`
 
-Comparisons:
-A7 < A102
-A7 < A25
+---
 
-Inserted to the left of A25.
+## Search Key: `B3`
 
+### BST Search Path
 
-Step 4
+```text
+A102 → B100 → B12 → B3
+```
 
-Inserted: B100
+**Number of comparisons:** `4`
 
-Comparisons:
-B100 > A102
-B100 > A25
+**Result:** `Found`
 
-Inserted to the right of A25.
+### Linear Search Path
 
+```text
+A102 → A25 → A7 → B100 → B12 → A120 → B3
+```
 
-Step 5
+**Number of comparisons:** `7`
 
-Inserted: B12
+**Result:** `Found`
 
-Comparisons:
-B12 > A102
-B12 > A25
-B12 < B100
+---
 
-Inserted to the left of B100.
+## Search Key: `A50`
 
+### BST Search Path
 
-Step 6
+```text
+A102 → A25 → A45 → A7
+```
 
-Inserted: A120
+**Number of comparisons:** `4`
 
-Comparisons:
-A120 > A102
-A120 < A25
+**Result:** `Not Found`
 
-Inserted to the left of A25.
+### Linear Search Path
 
+```text
+A102 → A25 → A7 → B100 → B12 → A120 → B3 → A45
+```
 
-Step 7
+**Number of comparisons:** `8`
 
-Inserted: B3
+**Result:** `Not Found`
 
-Comparisons:
-B3 > A102
-B3 > A25
-B3 < B100
-B3 > B12
+---
 
-Inserted to the right of B12.
+# 📈 Search Comparison Table
 
+| Search Key | BST Result | BST Comparisons | Linear Result | Linear Comparisons |
+|---|---|---:|---|---:|
+| `A45` | Found | 3 | Found | 8 |
+| `B3` | Found | 4 | Found | 7 |
+| `A50` | Not Found | 4 | Not Found | 8 |
 
-Step 8
+### Observation
 
-Inserted: A45
+The observed results show that **BST Search required fewer comparisons** than Linear Search for all three selected test cases.
 
-Comparisons:
-A45 < A102
-A45 > A25
-A45 > A120
+---
 
-Inserted to the right of A120.
+# ⏱️ Complexity Analysis
 
+## BST Search
 
-SEARCH TRACE
+| Case | Time Complexity |
+|---|---|
+| Best Case | `O(1)` |
+| Average Case | `O(log n)` for a balanced BST |
+| Worst Case | `O(n)` for a highly unbalanced BST |
 
-Search Key: A45
+---
 
-BST Search Path:
+## Linear Search
 
-A102 -> A25 -> A45
+| Case | Time Complexity |
+|---|---|
+| Best Case | `O(1)` |
+| Average Case | `O(n)` |
+| Worst Case | `O(n)` |
 
-Number of comparisons = 3
+---
 
-Result = Found
+# 💾 Space Complexity
 
+### BST
 
-Linear Search Path:
+Space required for `n` nodes:
 
-A102 -> A25 -> A7 -> B100 -> B12 -> A120 -> B3 -> A45
+```text
+O(n)
+```
 
-Number of comparisons = 8
+### Linear Search
 
-Result = Found
+Additional search space:
 
+```text
+O(1)
+```
 
-Search Key: B3
+The array containing the IDs requires:
 
-BST Search Path:
+```text
+O(n)
+```
 
-A102 -> B100 -> B12 -> B3
+storage.
 
-Number of comparisons = 4
+---
 
-Result = Found
-
-
-Linear Search Path:
-
-A102 -> A25 -> A7 -> B100 -> B12 -> A120 -> B3
-
-Number of comparisons = 7
-
-Result = Found
-
-
-Search Key: A50
-
-BST Search Path:
-
-A102 -> A25 -> A45 -> A7
-
-Number of comparisons = 4
-
-Result = Not Found
-
-
-Linear Search Path:
-
-A102 -> A25 -> A7 -> B100 -> B12 -> A120 -> B3 -> A45
-
-Number of comparisons = 8
-
-Result = Not Found
-
-
-SEARCH COMPARISON TABLE
-
-Search Key    BST Result    BST Comparisons    Linear Result    Linear Comparisons
-
-A45           Found         3                  Found            8
-B3            Found         4                  Found            7
-A50           Not Found     4                  Not Found        8
-
-
-COMPLEXITY ANALYSIS
-
-BST Search:
-
-Best Case: O(1)
-
-Average Case: O(log n) for a balanced BST
-
-Worst Case: O(n) for a highly unbalanced BST
-
-Linear Search:
-
-Best Case: O(1)
-
-Average Case: O(n)
-
-Worst Case: O(n)
-
-
-SPACE COMPLEXITY
-
-BST:
-
-Space required for n nodes = O(n)
-
-Linear Search:
-
-Additional search space = O(1)
-
-The array containing the IDs requires O(n) storage.
-
-
-EFFECT OF INSERTION ORDER
+# 🔀 Effect of Insertion Order
 
 Insertion order has a major effect on the height of a normal BST.
 
@@ -293,8 +287,9 @@ If the IDs are inserted in a balanced order, the tree can have a smaller height 
 
 If the IDs are inserted in an unfavourable order, the tree can become highly unbalanced.
 
-Example of a highly unbalanced tree:
+### Example of a Highly Unbalanced Tree
 
+```text
 A
  \
   B
@@ -302,16 +297,27 @@ A
     C
      \
       D
+```
 
-In this case, the height becomes approximately n - 1.
+In this case, the height becomes approximately:
 
-Therefore, BST search can degrade from O(log n) to O(n).
+```text
+n - 1
+```
 
+Therefore, BST search can degrade from:
 
-EFFECT OF KEY LENGTH
+```text
+O(log n) → O(n)
+```
+
+---
+
+# 🔤 Effect of Key Length
 
 The identification numbers have different lengths, such as:
 
+```text
 A7
 A25
 A45
@@ -320,8 +326,13 @@ A120
 B3
 B12
 B100
+```
 
-The program compares the IDs as strings using strcmp().
+The program compares the IDs as strings using:
+
+```c
+strcmp()
+```
 
 Longer keys may require more character comparisons before a difference is found.
 
@@ -329,75 +340,141 @@ Therefore, the length of the identification number can affect the actual cost of
 
 However, the standard BST complexity is normally expressed in terms of the number of nodes visited:
 
-Balanced BST: O(log n)
+```text
+Balanced BST → O(log n)
 
-Worst-case BST: O(n)
+Worst-case BST → O(n)
+```
 
+---
 
-COMPARISON OF BST SEARCH AND LINEAR SEARCH
+# ⚖️ BST Search vs Linear Search
 
-Parameter              BST Search                 Linear Search
+| Parameter | BST Search | Linear Search |
+|---|---|---|
+| Data Structure | Binary Search Tree | Array |
+| Best Case | `O(1)` | `O(1)` |
+| Average Case | `O(log n)` | `O(n)` |
+| Worst Case | `O(n)` | `O(n)` |
+| Search Method | Tree traversal | Sequential checking |
+| Effect of Insertion | High | None |
+| Additional Space | `O(1)` | `O(1)` |
+| Storage | `O(n)` | `O(n)` |
 
-Data Structure         Binary Search Tree         Array
-Best Case              O(1)                       O(1)
-Average Case            O(log n)                  O(n)
-Worst Case             O(n)                       O(n)
-Search Method           Tree traversal             Sequential checking
-Effect of insertion     High                        None
-Additional space        O(1)                       O(1)
-Storage                 O(n)                       O(n)
+---
 
+# 📌 Observed Results
 
-OBSERVED RESULTS
+### `A45`
 
-For A45:
+```text
+BST Search     → 3 comparisons
+Linear Search  → 8 comparisons
+```
 
-BST Search required 3 comparisons.
+### `B3`
 
-Linear Search required 8 comparisons.
+```text
+BST Search     → 4 comparisons
+Linear Search  → 7 comparisons
+```
 
-For B3:
+### `A50`
 
-BST Search required 4 comparisons.
-
-Linear Search required 7 comparisons.
-
-For A50:
-
-BST Search required 4 comparisons.
-
-Linear Search required 8 comparisons.
+```text
+BST Search     → 4 comparisons
+Linear Search  → 8 comparisons
+```
 
 The observed results show that BST Search required fewer comparisons for all three selected searches.
 
+---
 
-TREE HEIGHT ANALYSIS
+# 📏 Tree Height Analysis
 
 The longest path in the constructed BST is:
 
-A102 -> B100 -> B12 -> B3
+```text
+A102 → B100 → B12 → B3
+```
 
-Number of edges = 3
+Therefore:
 
+```text
+Number of edges  = 3
 Number of levels = 4
+```
 
 The tree is not perfectly balanced.
 
 An unbalanced BST may require more comparisons during searching.
 
+---
 
-THEORETICAL VS OBSERVED PERFORMANCE
+# 🧮 Theoretical vs Observed Performance
 
-For a balanced BST, search performance is approximately O(log n).
+### Theoretical Performance
 
-For the given BST, the tree is not perfectly balanced, so the observed comparisons depend on the location of each key.
+For a balanced BST:
 
-In the worst case, a normal BST can become skewed and its search complexity becomes O(n).
+```text
+Search ≈ O(log n)
+```
 
-Linear Search always checks elements sequentially and has O(n) average and worst-case complexity.
+For a highly unbalanced BST:
 
+```text
+Search = O(n)
+```
 
-CONCLUSION
+For Linear Search:
+
+```text
+Average Case = O(n)
+Worst Case   = O(n)
+```
+
+### Observed Performance
+
+For the selected test cases, BST Search required fewer comparisons than Linear Search.
+
+The actual number of comparisons depends on the location of the searched key and the structure of the BST.
+
+---
+
+# 🏢 Suitable Approach for a Growing Database
+
+As the database grows, maintaining a normal BST can become inefficient if the tree becomes highly unbalanced.
+
+A **self-balancing BST** can be used to maintain efficient searches.
+
+Examples include:
+
+```text
+AVL Tree
+Red-Black Tree
+```
+
+These structures maintain a controlled tree height and provide approximately:
+
+```text
+O(log n)
+```
+
+search performance.
+
+For very large database systems, indexed structures such as:
+
+```text
+B-Tree
+B+ Tree
+```
+
+can also be considered.
+
+---
+
+# ✅ Conclusion
 
 A Binary Search Tree was implemented using the given government identification numbers.
 
@@ -405,10 +482,48 @@ The inorder traversal was successfully obtained.
 
 BST Search required fewer comparisons than Linear Search for the selected test cases.
 
-The performance of a BST depends strongly on its height and insertion order. A balanced BST provides better search performance, while a highly unbalanced BST can have O(n) search time.
+The performance of a BST depends strongly on its height and insertion order. A balanced BST provides better search performance, while a highly unbalanced BST can have `O(n)` search time.
 
 The length of the identification keys can also affect the actual cost of string comparisons.
 
-For a growing database, a self-balancing BST such as an AVL Tree or Red-Black Tree can be used to maintain efficient search performance.
+For a growing database, a self-balancing BST such as an **AVL Tree** or **Red-Black Tree** can be used to maintain efficient search performance.
 
-For very large database systems, indexed structures such as B-Trees or B+ Trees can also be considered.
+For very large database systems, indexed structures such as **B-Trees** or **B+ Trees** can also be considered.
+
+---
+
+# 📁 Project Files
+
+```text
+Question_11/
+│
+├── question_11_bst.c
+├── question_11_output.txt
+└── README.md
+```
+
+---
+
+## 🧠 Concepts Covered
+
+```text
+✓ Binary Search Tree
+✓ BST Insertion
+✓ Inorder Traversal
+✓ BST Search
+✓ Linear Search
+✓ String Comparison
+✓ Trace Table
+✓ Search Comparison
+✓ Tree Height
+✓ Time Complexity
+✓ Space Complexity
+✓ Insertion Order Analysis
+✓ Key Length Analysis
+```
+
+---
+
+## 🚀 Status
+
+**Assignment Completed ✓**
